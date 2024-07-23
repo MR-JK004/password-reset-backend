@@ -83,7 +83,7 @@ const forgetPassword = async (req, res) => {
       user.resetTokenExpiration = Date.now() + 3600000; // 1 hour
       await user.save();
   
-      const resetLink = `http://localhost:5173/reset-password/${randomString}`;
+      const resetLink = `https://password-reset-backend-x8vm.onrender.com/reset-password/${randomString}`;
   
       await transporter.sendMail({
         to: email,
@@ -123,7 +123,7 @@ const resetPassword = async (req, res) => {
         if (!user) {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
-        
+
         if (!validatePassword(password)) {
             return res.status(400).json({ 
                 message: '\n1) The Password must contain at least 8 characters\n2) One lowercase letter, one uppercase letter, one number, and one special character must be included' 
