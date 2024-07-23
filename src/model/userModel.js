@@ -12,10 +12,11 @@ const userSchema = new mongoose.Schema({
         }
     },
     password: {
-        type:String,
-        validate:{
-            validator:validatePassword,
-            message:'\n1)The Password must Contain 8 Characters\n2)One LowerCase,One UpperCase,One Number and One Special Character must be there'
+        type: String,
+        required: true,
+        validate: {
+            validator: validatePassword,
+            message: '\n1)The Password must Contain 8 Characters\n2)One LowerCase,One UpperCase,One Number and One Special Character must be there'
         }
     },
     resetToken: String,
