@@ -3,11 +3,17 @@ import userModel from '../model/userModel.js'
 import crypto from 'crypto'
 import Function from '../common/Function.js'
 import nodeMailer from 'nodemailer'
+import { validatePassword } from '../common/Validations.js'
 
 const createUser = async (req, res) => {
     try {
         const { email, password } = req.body;
         let user = await userModel.findOne({ email });
+        if (!validatePassword(password)) {
+            return res.status(400).json({ 
+                message: '\n1) The Password must contain at least 8 characters\n2) One lowercase letter, one uppercase letter, one number, and one special character must be included' 
+            });
+        }
         if (user) {
             return res.status(400).json({ message: 'User with this email already exists' });
         }

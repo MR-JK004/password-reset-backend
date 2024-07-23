@@ -3,13 +3,8 @@ export const validateEmail = function(email) {
     return re.test(email)
 };
 
-
-export const validateMobile = function(mobile){
-    let re = /\d{10}/
-    return re.test(mobile);
-}
-
 export const validatePassword = function(password){
+    console.log(password)
     let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return re.test(password);
 }
