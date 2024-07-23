@@ -83,7 +83,7 @@ const forgetPassword = async (req, res) => {
       user.resetTokenExpiration = Date.now() + 3600000; // 1 hour
       await user.save();
   
-      const resetLink = `https://password-reset-backend-x8vm.onrender.com/reset-password/${randomString}`;
+      const resetLink = `https://reset-password-nodejs.netlify.app/reset-password/${randomString}`;
   
       await transporter.sendMail({
         to: email,
