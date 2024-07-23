@@ -108,23 +108,29 @@ const resetPassword = async (req, res) => {
     try {
         const { token, password } = req.body;
 
-        // Ensure the token and password are present
+        
         if (!token || !password) {
             return res.status(400).json({ message: 'Token and password are required' });
         }
 
-        // Find the user by the reset token and ensure the token has not expired
+        
         const user = await userModel.findOne({
             resetToken: token,
             resetTokenExpiration: { $gt: Date.now() }
         });
 
-        // If user is not found or token has expired
+        
         if (!user) {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
+        
+        if (!validatePassword(password)) {
+            return res.status(400).json({ 
+                message: '\n1) The Password must contain at least 8 characters\n2) One lowercase letter, one uppercase letter, one number, and one special character must be included' 
+            });
+        }
 
-        // Hash the new password before saving it
+        
         user.password = await Function.hashPassword(password);
         user.resetToken = undefined;
         user.resetTokenExpiration = undefined;
