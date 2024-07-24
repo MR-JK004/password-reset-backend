@@ -37,7 +37,7 @@ This is the backend part of the password reset application built with Node.js an
 1. Start the server:
 
     ```
-    npm start
+    node index.js
     ```
 
 2. The server will be running on `https://password-reset-backend-x8vm.onrender.com`.
